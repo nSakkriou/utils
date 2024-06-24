@@ -10,8 +10,8 @@ var agentFile *AgentFile
 var isLoad = false
 
 // Charger la config
-func Load() error {
-	byteValue, err := os.ReadFile(AgentFileName)
+func Load(path string) error {
+	byteValue, err := os.ReadFile(path)
 	if err != nil {
 		log.Fatalf("Failed to read file: %s", err)
 		return err
