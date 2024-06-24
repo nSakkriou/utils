@@ -8,27 +8,6 @@ import (
 	"github.com/theritikchoure/logx"
 )
 
-func Info(message string, format ...interface{}) {
-	logfLevel("INFO", message, logx.FGGREEN, format...)
-}
-
-func Debug(message string, format ...interface{}) {
-	logfLevel("DEBUG", message, logx.FGBLUE, format...)
-}
-
-func Raw(message string, format ...interface{}) {
-	logf(message, "", format...)
-}
-
-func Error(message string, format ...interface{}) {
-	logfLevel("ERROR", message, logx.FGRED, format...)
-}
-
-func Verbose(message string, format ...interface{}) {
-	logfLevel("VERBOSE", message, logx.FGYELLOW, format...)
-}
-
-// Ne pas utiliser directement
 func logf(message, color string, format ...interface{}) {
 	message = strings.ToLower(message)
 
@@ -41,11 +20,11 @@ func logf(message, color string, format ...interface{}) {
 }
 
 func logfLevel(level, message, color string, format ...interface{}) {
-	prefixedMessage := fmt.Sprintf("[%s] [%s] %s", timestamp(), level, message)
+	prefixedMessage := fmt.Sprintf("[%s] [%s]\t%s", timestamp(), level, message)
 	logf(prefixedMessage, color, format...)
 }
 
 func timestamp() string {
 	now := time.Now()
-	return now.Format("15:04:05")
+	return now.Format("2006-01-02 15:04:05")
 }
