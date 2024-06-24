@@ -22,6 +22,8 @@ func logf(message, color string, format ...interface{}) {
 }
 
 func logfLevel(level, message, color string, format ...interface{}) {
+	logx.ColoringEnabled = true
+
 	prefixedMessage := fmt.Sprintf("[%s] [%s]\t%s", timestamp(), level, message)
 	logf(prefixedMessage, color, format...)
 }
