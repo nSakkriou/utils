@@ -9,7 +9,9 @@ import (
 )
 
 func logf(message, color string, format ...interface{}) {
-	message = strings.ToLower(message)
+	if Lowercase {
+		message = strings.ToLower(message)
+	}
 
 	if len(format) == 0 {
 		logx.Logf(message, color, "", format...)
@@ -26,5 +28,5 @@ func logfLevel(level, message, color string, format ...interface{}) {
 
 func timestamp() string {
 	now := time.Now()
-	return now.Format("2006-01-02 15:04:05")
+	return now.Format(TimeFormat)
 }

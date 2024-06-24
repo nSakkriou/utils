@@ -2,32 +2,49 @@ package logn
 
 import (
 	"os"
-
-	"github.com/theritikchoure/logx"
 )
 
-func Info(message string, format ...interface{}) {
-	logfLevel("INFO", message, logx.FGGREEN, format...)
+func Raw(message string, format ...interface{}) {
+	if ShowRaw {
+		logf(message, "", format...)
+	}
 }
 
 func Debug(message string, format ...interface{}) {
-	logfLevel("DEBUG", message, logx.FGBLUE, format...)
-}
-
-func Raw(message string, format ...interface{}) {
-	logf(message, "", format...)
-}
-
-func Error(message string, format ...interface{}) {
-	logfLevel("ERROR", message, logx.FGRED, format...)
+	if ShowDebug {
+		logfLevel(PrefixDebug, message, ColorDebug, format...)
+	}
 }
 
 func Verbose(message string, format ...interface{}) {
-	logfLevel("VERBOSE", message, logx.FGYELLOW, format...)
+	if ShowVerbose {
+		logfLevel(PrefixVerbose, message, ColorVerbose, format...)
+	}
+}
+
+func Info(message string, format ...interface{}) {
+	if ShowInfo {
+		logfLevel(PrefixInfo, message, ColorInfo, format...)
+	}
+}
+
+func Warn(message string, format ...interface{}) {
+	if ShowInfo {
+		logfLevel(PrefixWarn, message, ColorWarn, format...)
+	}
+}
+
+func Error(message string, format ...interface{}) {
+	if ShowError {
+		logfLevel(PrefixError, message, ColorError, format...)
+	}
 }
 
 // Print error and exit program
 func Fatal(message string, format ...interface{}) {
-	logfLevel("FATAL", message, logx.FGRED, format...)
+	if ShowFatal {
+		logfLevel(PrefixFatal, message, ColorFatal, format...)
+	}
+
 	os.Exit(0)
 }
