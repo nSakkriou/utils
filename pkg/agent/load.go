@@ -2,29 +2,25 @@ package agent
 
 import (
 	"encoding/json"
-	"log"
 	"os"
+
+	"github.com/nSakkriou/utils/pkg/logn"
 )
 
-var agentFile *AgentFile
-var isLoad = false
-
 // Charger la config
-func Load(path string) error {
+func Load(path string) (*AgentFile, error) {
+	var agentFile *AgentFile
+
 	byteValue, err := os.ReadFile(path)
 	if err != nil {
-		log.Fatalf("Failed to read file: %s", err)
-		return err
+		logn.Fatal("Failed to read file: %s", err)
+		return nil, err
 	}
 
 	if err := json.Unmarshal(byteValue, &agentFile); err != nil {
-		log.Fatalf("Failed to parse JSON: %s", err)
+		logn.Fatal("Failed to parse JSON: %s", err)
+		return nil, err
 	}
 
-	isLoad = true
-	return nil
-}
-
-func IsLoad() bool {
-	return isLoad
+	return agentFile, nil
 }

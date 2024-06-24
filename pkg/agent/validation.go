@@ -25,7 +25,7 @@ func ValidConfig(config *AgentFile) bool {
 
 	// Check si le dossier existe
 	if util.FileExist(config.ScriptsFolderPath) {
-		logn.Error("le dossier " + config.ScriptsFolderPath + " n'existe pas")
+		logn.Error("le dossier %s n'existe pas", config.ScriptsFolderPath)
 		return false
 	}
 
@@ -33,7 +33,7 @@ func ValidConfig(config *AgentFile) bool {
 	for _, endCommand := range config.EndCommands {
 		// Checker les doublons
 		if util.ArrayContains(endpointNames, endCommand.EndpointName) {
-			logn.Error("le endpoint " + endCommand.EndpointName + " ne peut pas exister en double")
+			logn.Error("le endpoint %s ne peut pas exister en double", endCommand.EndpointName)
 			return false
 		}
 
@@ -43,7 +43,7 @@ func ValidConfig(config *AgentFile) bool {
 		for _, scriptName := range endCommand.ScriptsFilesNames {
 			path := filepath.Join(config.ScriptsFolderPath, scriptName)
 			if util.FileExist(path) {
-				logn.Error("le script " + path + " n'existe pas")
+				logn.Error("le script %s n'existe pas", path)
 				return false
 			}
 		}
