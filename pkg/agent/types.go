@@ -11,7 +11,7 @@ type AgentFile struct {
 	CorsOption CorsOption `json:"cors_option"`
 
 	// OPTIONAL
-	UseCustomNav         bool      `json:"use_custom_nav`
+	UseCustomNav         bool      `json:"use_custom_nav"`
 	CustomNavDescription []NavLink `json:"custom_nav_links"`
 }
 
